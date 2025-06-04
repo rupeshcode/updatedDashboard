@@ -67,16 +67,15 @@ const Home = () => {
   };
 
   return (
-    <Box className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <AppBar position="static" className="bg-white shadow-sm" elevation={1}>
-        <Toolbar className="px-4">
+    <Box className="min-h-screen bg-white-50 mb-2">
+      <AppBar
+        position="static"
+        elevation={1}
+        style={{ backgroundColor: "white" }}
+      >
+        <Toolbar className="px-4 w-auto">
           <Box className="flex items-center gap-2 flex-1">
-            <img
-              src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=50&q=80"
-              alt="Ford Logo"
-              className="h-8 w-auto"
-            />
+            <img src="/ford.jpeg" alt="Ford Logo" className="h-8 w-auto" />
             <Typography variant="h6" className="text-gray-900 font-semibold">
               MOS - Constraint Management
             </Typography>
@@ -99,22 +98,18 @@ const Home = () => {
               Change Location
             </Button>
             <Box className="flex items-center gap-2">
-              <Avatar
-                src="https://api.dicebear.com/7.x/avataaars/svg?seed=admin"
-                className="w-10 h-10"
-              />
               <Box className="text-sm">
                 <Typography
                   variant="body2"
                   className="font-medium text-gray-900"
                 >
-                  Shiva Balakrishnan
+                  Rupesh
                 </Typography>
                 <Typography variant="caption" className="text-gray-500">
                   Super Admin
                 </Typography>
                 <Typography variant="caption" className="text-gray-500 block">
-                  Date as of 03/26/24
+                  Date as of 04/06/25
                 </Typography>
               </Box>
             </Box>
@@ -123,11 +118,11 @@ const Home = () => {
       </AppBar>
 
       <Container maxWidth={false} className="flex p-0">
-        <Paper className="w-72 border-r border-gray-200 p-4" elevation={0}>
+        <Paper className="w-72 border-r border-gray-200 p-4 mt-2" elevation={0}>
           <FilterPanel onFilterChange={handleFilterChange} />
         </Paper>
 
-        <Box className="flex-1 p-4">
+        <Box className="flex-1 p-4 max-w-full overflow-x-auto">
           <Box className="w-full">
             <Tabs
               value={activeTab}
@@ -150,47 +145,12 @@ const Home = () => {
 
             {activeTab === "blocked-starved" && (
               <Box className="space-y-4">
-                <Box className="flex items-center justify-between">
-                  <Typography variant="h5" className="font-medium">
-                    Blocked Starved Analysis: WEP
-                  </Typography>
-                  <Typography variant="body2" className="text-gray-500">
-                    Last Updated: 16 Jan 2025
-                  </Typography>
-                </Box>
-
                 <Card className="shadow-sm">
                   <CardContent className="p-4">
                     <Box className="flex items-center justify-between mb-2">
                       <Typography variant="h6" className="font-medium">
                         Chart
                       </Typography>
-                      <Box className="flex gap-2">
-                        <Button
-                          variant="text"
-                          size="small"
-                          startIcon={<Download fontSize="small" />}
-                          className="text-gray-600"
-                        >
-                          Export
-                        </Button>
-                        <Button
-                          variant="text"
-                          size="small"
-                          startIcon={<Print fontSize="small" />}
-                          className="text-gray-600"
-                        >
-                          Print
-                        </Button>
-                        <Button
-                          variant="text"
-                          size="small"
-                          startIcon={<Save fontSize="small" />}
-                          className="text-gray-600"
-                        >
-                          Save
-                        </Button>
-                      </Box>
                     </Box>
                     <AnalysisChart filters={filters} />
                   </CardContent>
@@ -198,29 +158,6 @@ const Home = () => {
 
                 <Card className="shadow-sm">
                   <CardContent className="p-4">
-                    <Box className="flex items-center justify-between mb-2">
-                      <Typography variant="h6" className="font-medium">
-                        Details within Teams
-                      </Typography>
-                      <Box className="flex gap-2">
-                        <Button
-                          variant="text"
-                          size="small"
-                          startIcon={<Download fontSize="small" />}
-                          className="text-gray-600"
-                        >
-                          Export
-                        </Button>
-                        <Button
-                          variant="text"
-                          size="small"
-                          startIcon={<Print fontSize="small" />}
-                          className="text-gray-600"
-                        >
-                          Print
-                        </Button>
-                      </Box>
-                    </Box>
                     <DataTable filters={filters} />
                   </CardContent>
                 </Card>
@@ -269,12 +206,6 @@ const Home = () => {
           </Box>
         </Box>
       </Container>
-
-      <Box className="border-t border-gray-200 p-4 text-center">
-        <Typography variant="body2" className="text-gray-500">
-          © 2025 Manufacturing Operations System. All rights reserved.
-        </Typography>
-      </Box>
     </Box>
   );
 };

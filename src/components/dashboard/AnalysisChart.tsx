@@ -9,7 +9,16 @@ import {
   Box,
   IconButton,
 } from "@mui/material";
-import { Settings, Download, Fullscreen } from "@mui/icons-material";
+import {
+  Settings,
+  Download,
+  Fullscreen,
+  Info,
+  Expand,
+  FullscreenOutlined,
+  OpenInFullOutlined,
+  MoreVertOutlined,
+} from "@mui/icons-material";
 
 interface AnalysisChartProps {
   title?: string;
@@ -21,7 +30,7 @@ interface AnalysisChartProps {
 const AnalysisChart = ({
   title = "Blocked Starved Analysis: WEP",
   subtitle = "Chart",
-  lastUpdated = "16 Jan 2025",
+  lastUpdated = "04 Jun 2025",
   filters = {},
 }: AnalysisChartProps) => {
   const chartRef = useRef<HighchartsReact.RefObject>(null);
@@ -124,23 +133,6 @@ const AnalysisChart = ({
     }
   }, [filters]);
 
-  const handleExportChart = () => {
-    if (chartRef.current && chartRef.current.chart) {
-      chartRef.current.chart.exportChart({
-        type: "image/png",
-        filename: "blocked-starved-analysis",
-      });
-    }
-  };
-
-  const handleFullscreen = () => {
-    if (chartRef.current && chartRef.current.chart) {
-      if (chartRef.current.chart.fullscreen) {
-        chartRef.current.chart.fullscreen.toggle();
-      }
-    }
-  };
-
   return (
     <Card className="w-full bg-white shadow-sm">
       <CardContent className="p-4">
@@ -153,21 +145,19 @@ const AnalysisChart = ({
               {subtitle}
             </Typography>
           </Box>
-          <Box className="flex items-center gap-2">
+          <Box className="flex items-center gap-1">
             <Typography variant="caption" className="text-gray-500">
               Last Updated: {lastUpdated}
             </Typography>
-            <Box className="flex gap-1">
-              <IconButton size="small" onClick={handleExportChart}>
-                <Download fontSize="small" />
-              </IconButton>
-              <IconButton size="small" onClick={handleFullscreen}>
-                <Fullscreen fontSize="small" />
-              </IconButton>
-              <IconButton size="small">
-                <Settings fontSize="small" />
-              </IconButton>
-            </Box>
+            <IconButton size="small" className="text-gray-500">
+              <Info fontSize="small" />
+            </IconButton>
+            <IconButton size="small" className="text-gray-500">
+              <OpenInFullOutlined fontSize="small" />
+            </IconButton>
+            <IconButton size="small" className="text-gray-500">
+              <MoreVertOutlined fontSize="small" />
+            </IconButton>
           </Box>
         </Box>
         <Box className="flex items-center gap-4 mb-4">

@@ -10,11 +10,13 @@ import {
   Button,
   Box,
   TextField,
+  IconButton,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { format } from "date-fns";
+import { ArrowBack, BackHand, Save } from "@mui/icons-material";
 
 interface FilterPanelProps {
   onFilterChange?: (filters: FilterState) => void;
@@ -89,13 +91,21 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Card className="w-full h-full bg-white overflow-y-auto" elevation={0}>
         <CardContent className="p-4">
-          <Box className="flex justify-between items-center mb-4">
+          <Box className="flex justify-between items-center mb-4 w-auto">
             <Typography variant="h6" className="font-semibold">
               FILTERS
             </Typography>
             <Button variant="outlined" onClick={handleReset} size="small">
               Reset
             </Button>
+
+            <IconButton aria-label="delete" size="small">
+              <Save fontSize="inherit" />
+            </IconButton>
+
+            <IconButton aria-label="delete" size="small">
+              <ArrowBack fontSize="inherit" />
+            </IconButton>
           </Box>
 
           <Box className="space-y-6">

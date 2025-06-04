@@ -11,8 +11,14 @@ import {
   Box,
   Pagination,
   InputAdornment,
+  IconButton,
 } from "@mui/material";
-import { Search } from "@mui/icons-material";
+import {
+  Info,
+  MoreVertOutlined,
+  OpenInFullOutlined,
+  Search,
+} from "@mui/icons-material";
 
 interface DataTableProps {
   data?: Array<Record<string, any>>;
@@ -102,8 +108,8 @@ const DataTable: React.FC<DataTableProps> = ({
     Object.values(row).some(
       (value) =>
         value &&
-        value.toString().toLowerCase().includes(searchTerm.toLowerCase()),
-    ),
+        value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    )
   );
 
   const sortedData = [...filteredData].sort((a, b) => {
@@ -122,21 +128,22 @@ const DataTable: React.FC<DataTableProps> = ({
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedData = sortedData.slice(startIndex, startIndex + itemsPerPage);
 
-  const handleSort = (columnId: string) => {
-    if (sortColumn === columnId) {
-      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
-    } else {
-      setSortColumn(columnId);
-      setSortDirection("asc");
-    }
-  };
-
   return (
     <Paper className="w-full bg-white rounded-md shadow-sm border border-gray-200">
       <Box className="p-4 border-b border-gray-200">
-        <Typography variant="h6" className="font-medium mb-2">
-          Details within Teams
-        </Typography>
+        <div className="flex items-center justify-between">
+          <Typography variant="h6" className="font-medium mb-2">
+            Details within Teams
+          </Typography>
+          <Box className="flex items-center gap-1">
+            <IconButton size="small" className="text-gray-500">
+              <OpenInFullOutlined fontSize="small" />
+            </IconButton>
+            <IconButton size="small" className="text-gray-500">
+              <MoreVertOutlined fontSize="small" />
+            </IconButton>
+          </Box>
+        </div>
         <TextField
           placeholder="Search..."
           value={searchTerm}
@@ -160,17 +167,9 @@ const DataTable: React.FC<DataTableProps> = ({
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
-                  onClick={() => handleSort(column.accessorKey)}
                   className="cursor-pointer hover:bg-gray-50"
                 >
-                  <Box className="flex items-center">
-                    {column.header}
-                    {sortColumn === column.accessorKey && (
-                      <span className="ml-1">
-                        {sortDirection === "asc" ? "↑" : "↓"}
-                      </span>
-                    )}
-                  </Box>
+                  <Box className="flex items-center">{column.header}</Box>
                 </TableCell>
               ))}
             </TableRow>
