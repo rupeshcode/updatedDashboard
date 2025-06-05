@@ -38,7 +38,7 @@ interface FilterState {
   shiftName: string;
 }
 
-const style = {
+const modalStyle = {
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -112,10 +112,26 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <Card className="w-full h-full bg-white overflow-y-auto" elevation={0}>
-          <CardContent className="p-4">
-            <Box className="flex justify-between items-center mb-4 w-auto">
-              <Typography variant="h6" className="font-semibold">
+        <Card
+          elevation={0}
+          sx={{
+            width: "100%",
+            height: "100%",
+            backgroundColor: "white",
+            overflowY: "auto",
+          }}
+        >
+          <CardContent sx={{ padding: 2 }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: 2,
+                width: "auto",
+              }}
+            >
+              <Typography variant="h6" sx={{ fontWeight: 600 }}>
                 FILTERS
               </Typography>
               <Button variant="outlined" onClick={handleReset} size="small">
@@ -131,7 +147,7 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
               </IconButton>
             </Box>
 
-            <Box className="space-y-6">
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
               <FormControl fullWidth size="small">
                 <InputLabel>Year</InputLabel>
                 <Select
@@ -167,7 +183,7 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
                 </Select>
               </FormControl>
 
-              <Box className="space-y-2">
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                 <DatePicker
                   label="From Date"
                   value={filters.dateRange.from}
@@ -289,7 +305,7 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={modalStyle}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Save Filter
           </Typography>
@@ -302,7 +318,14 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
             onChange={(e) => setFilterName(e.target.value)}
             sx={{ mt: 2 }}
           />
-          <Box display="flex" justifyContent="flex-end" gap={1} sx={{ mt: 3 }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: 1,
+              mt: 3,
+            }}
+          >
             <Button variant="outlined" onClick={handleClose}>
               Close
             </Button>

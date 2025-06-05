@@ -8,6 +8,7 @@ import {
   Button,
   Box,
   IconButton,
+  Tooltip,
 } from "@mui/material";
 import {
   Settings,
@@ -134,39 +135,93 @@ const AnalysisChart = ({
   }, [filters]);
 
   return (
-    <Card className="w-full bg-white shadow-sm">
-      <CardContent className="p-4">
-        <Box className="flex justify-between items-center mb-4">
+    <Card
+      sx={{
+        width: "100%",
+        backgroundColor: "white",
+        boxShadow: 1,
+      }}
+    >
+      <CardContent sx={{ padding: 2 }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 2,
+          }}
+        >
           <Box>
-            <Typography variant="h6" className="font-medium">
+            <Typography variant="h6" sx={{ fontWeight: "medium" }}>
               {title}
             </Typography>
-            <Typography variant="body2" className="text-gray-500">
+            <Typography variant="body2" sx={{ color: "text.secondary" }}>
               {subtitle}
             </Typography>
           </Box>
-          <Box className="flex items-center gap-1">
-            <Typography variant="caption" className="text-gray-500">
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 0.5,
+            }}
+          >
+            <Typography variant="caption" sx={{ color: "text.secondary" }}>
               Last Updated: {lastUpdated}
             </Typography>
-            <IconButton size="small" className="text-gray-500">
-              <Info fontSize="small" />
-            </IconButton>
-            <IconButton size="small" className="text-gray-500">
+            <Tooltip title="Starved Analysis Details">
+              <IconButton size="small" sx={{ color: "text.secondary" }}>
+                <Info fontSize="small" />
+              </IconButton>
+            </Tooltip>
+            <IconButton size="small" sx={{ color: "text.secondary" }}>
               <OpenInFullOutlined fontSize="small" />
             </IconButton>
-            <IconButton size="small" className="text-gray-500">
+            <IconButton size="small" sx={{ color: "text.secondary" }}>
               <MoreVertOutlined fontSize="small" />
             </IconButton>
           </Box>
         </Box>
-        <Box className="flex items-center gap-4 mb-4">
-          <Box className="flex items-center gap-1">
-            <Box className="w-4 h-1 bg-blue-600 rounded"></Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            marginBottom: 2,
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 0.5,
+            }}
+          >
+            <Box
+              sx={{
+                width: 16,
+                height: 4,
+                backgroundColor: "#1976d2",
+                borderRadius: 1,
+              }}
+            />
             <Typography variant="caption">Blocked (%)</Typography>
           </Box>
-          <Box className="flex items-center gap-1">
-            <Box className="w-4 h-1 bg-yellow-400 rounded"></Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 0.5,
+            }}
+          >
+            <Box
+              sx={{
+                width: 16,
+                height: 4,
+                backgroundColor: "#ffeb3b",
+                borderRadius: 1,
+              }}
+            />
             <Typography variant="caption">Starved (%)</Typography>
           </Box>
         </Box>

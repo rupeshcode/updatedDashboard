@@ -129,21 +129,54 @@ const DataTable: React.FC<DataTableProps> = ({
   const paginatedData = sortedData.slice(startIndex, startIndex + itemsPerPage);
 
   return (
-    <Paper className="w-full bg-white rounded-md shadow-sm border border-gray-200">
-      <Box className="p-4 border-b border-gray-200">
-        <div className="flex items-center justify-between">
-          <Typography variant="h6" className="font-medium mb-2">
+    <Paper
+      sx={{
+        width: "100%",
+        backgroundColor: "white",
+        borderRadius: 1,
+        boxShadow: 1,
+        border: 1,
+        borderColor: "divider",
+      }}
+    >
+      <Box
+        sx={{
+          padding: 2,
+          borderBottom: 1,
+          borderColor: "divider",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: "medium",
+              marginBottom: 1,
+            }}
+          >
             Details within Teams
           </Typography>
-          <Box className="flex items-center gap-1">
-            <IconButton size="small" className="text-gray-500">
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 0.5,
+            }}
+          >
+            <IconButton size="small" sx={{ color: "text.secondary" }}>
               <OpenInFullOutlined fontSize="small" />
             </IconButton>
-            <IconButton size="small" className="text-gray-500">
+            <IconButton size="small" sx={{ color: "text.secondary" }}>
               <MoreVertOutlined fontSize="small" />
             </IconButton>
           </Box>
-        </div>
+        </Box>
         <TextField
           placeholder="Search..."
           value={searchTerm}
@@ -153,23 +186,36 @@ const DataTable: React.FC<DataTableProps> = ({
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <Search className="h-4 w-4 text-gray-400" />
+                <Search
+                  sx={{
+                    height: 16,
+                    width: 16,
+                    color: "text.disabled",
+                  }}
+                />
               </InputAdornment>
             ),
           }}
         />
       </Box>
 
-      <Box className="overflow-x-auto">
+      <Box sx={{ overflowX: "auto" }}>
         <Table>
           <TableHead>
             <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
-                  className="cursor-pointer hover:bg-gray-50"
+                  sx={{
+                    cursor: "pointer",
+                    "&:hover": {
+                      backgroundColor: "grey.50",
+                    },
+                  }}
                 >
-                  <Box className="flex items-center">{column.header}</Box>
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    {column.header}
+                  </Box>
                 </TableCell>
               ))}
             </TableRow>
@@ -189,7 +235,10 @@ const DataTable: React.FC<DataTableProps> = ({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="text-center py-6"
+                  sx={{
+                    textAlign: "center",
+                    paddingY: 3,
+                  }}
                 >
                   No results found
                 </TableCell>
@@ -200,7 +249,15 @@ const DataTable: React.FC<DataTableProps> = ({
       </Box>
 
       {totalPages > 1 && (
-        <Box className="p-4 border-t border-gray-200 flex justify-center">
+        <Box
+          sx={{
+            padding: 2,
+            borderTop: 1,
+            borderColor: "divider",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           <Pagination
             count={totalPages}
             page={currentPage}
