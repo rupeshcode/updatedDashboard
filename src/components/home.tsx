@@ -19,6 +19,7 @@ import { Info, Download, Print, Save } from "@mui/icons-material";
 import FilterPanel from "./dashboard/FilterPanel";
 import AnalysisChart from "./dashboard/AnalysisChart";
 import DataTable from "./dashboard/DataTable";
+import LocationModal from "./dashboard/LocationModal";
 
 interface FilterState {
   year: string;
@@ -35,8 +36,16 @@ interface FilterState {
   shiftName: string;
 }
 
+interface LocationData {
+  plant: string;
+  area: string;
+  parentGroupName: string;
+  groupName: string;
+}
+
 const Home = () => {
   const [activeTab, setActiveTab] = useState("blocked-starved");
+  const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
     year: "",
     month: "",
@@ -65,6 +74,24 @@ const Home = () => {
       assetType: "",
       shiftName: "",
     });
+  };
+
+  const handleLocationModalOpen = () => {
+    setIsLocationModalOpen(true);
+  };
+
+  const handleLocationModalClose = () => {
+    setIsLocationModalOpen(false);
+  };
+
+  const handleLocationSubmit = async (data: LocationData) => {
+    try {
+      console.log("Location data submitted:", data);
+    } catch (error) {
+      console.error("Error submitting location data:", error);
+
+      throw error;
+    }
   };
 
   return (
@@ -125,6 +152,7 @@ const Home = () => {
             </Button>
             <Button
               variant="outlined"
+              onClick={handleLocationModalOpen}
               sx={{
                 color: "grey.700",
                 borderColor: "grey.300",
@@ -159,7 +187,7 @@ const Home = () => {
                     display: "block",
                   }}
                 >
-                  Date as of 04/06/25
+                  Date as of 11/06/25
                 </Typography>
               </Box>
             </Box>
@@ -341,6 +369,12 @@ const Home = () => {
           </Box>
         </Box>
       </Container>
+
+      <LocationModal
+        open={isLocationModalOpen}
+        onClose={handleLocationModalClose}
+        onSubmit={handleLocationSubmit}
+      />
     </Box>
   );
 };
